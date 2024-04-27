@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            width:40%;
+            display: block;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        button{
+            margin: 10px;
+            padding: 10px;
+            width: 15%;
+        }
+        #output2{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+      <h1> Sign up Form</h1>
+        
+        <form>
+        
+         Email :  <input type="email" name="email" id="email" placeholder="Example@email.com" value="">
+         Password : <input type="password" name="password" id="password" placeholder="Your Password" value="">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="output">
+            <h1> User Details:</h1>
+        </div>
+        <div id="output2">
+
+        </div>
+
+        <script>
+            const email_box = document.querySelector('#email');
+            const password_box = document.querySelector('#password');
+            const submit_button = document.querySelector('button');
+            const output_div = document.querySelector('.output');
+
+
+            submit_button.addEventListener("click", validateForm)
+
+            function validateForm(event_details){
+                  event_details.preventDefault(); // form submit button will not load the page
+                //   console.log("Form  is getting  validated")
+                // get all input values: 
+                let email = email_box.value;
+                let password = password_box.value;
+
+                // validations: 
+                 if(!email || !password){
+                     alert("All fields are required")
+                 }
+                else if(!email.includes("@")){
+                    alert("Enter a valid email")
+                }
+                else if(password.length<8){
+                    alert("Password should be atleast 8 characters long")
+                }
+                else{
+                    alert("Form submitted successfully")
+                    // output_div.innerHTML =  output_div.innerHTML+ `
+                    //     <div> 
+                    //         <p> Name: ${name}</p>
+                    //         <p> Email: ${email}</p>
+                    //         <p> Password: ${password}</p>
+                    //     </div>
+                    // `
+                    
+                    // create html elements dynamicaaly: 
+                    const userDetailsDiv = document.createElement('div');
+                    userDetailsDiv.innerHTML = `
+                        <p> Name: ${name}</p>
+                        <p> Email: ${email}</p>
+                        <p> Password: ${password}</p>
+                    `
+                    userDetailsDiv.style.border = "1px solid black";
+                    userDetailsDiv.style.padding = "10px";
+
+                    output_div.prepend(userDetailsDiv)
+
+                    const output_data = document.getElementById("output2");
+                    output_data.innerHTML = `
+                    <p>All good to go!</P>
+                    `
+                    output_div.append(output_data);
+
+
+
+
+
+
+
+
+
+                    name_box.value = "";
+                    email_box.value = "";
+                    password_box.value = "";
+                    confirm_password_box.value = "";
+                }
+
+            }
+
+
+
+        </script>
+
+</body>
+</html>
